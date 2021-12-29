@@ -27,10 +27,10 @@ def hash(text):
         except: # sifreleme gercekleşmezse istemciye alttaki mesaj donuyor
             return 'Uzgunum! Sifreleme gerceklestirilemedi'
 
+        #veri tabanına şifrelenen metin kaydediliyor
         baglanti = db.cursor()
-        deger = 'avc'
         try:
-            sonuc = baglanti.execute('call py_veeri_ekle(%s)', (cipher))
+            sonuc = baglanti.execute('call py_veri_ekle(%s)', (cipher))
             db.commit()
         except:
             print('hata sifre veritabanına kayıtedilemedi')

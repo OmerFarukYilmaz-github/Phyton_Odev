@@ -28,15 +28,29 @@ class dilKontrol:
         uyan = 0
         uymayan = 0
         deger = deger.split(" ")
+
         for kelime in deger:
+            ince_varmi = False
+            kalin_varmi = False
 
-            if (((sum(kelime.count(ince) for ince in self.inceunluler)) != 0) and (sum(kelime.count(kalin) for kalin in
-                                                                                       self.kalinunluler)) != 0):  # Aynı kelime içerisinde hem kalın ünlü hem de ince ünlü bulunuyor mu diye bakar.
+            for harf in kelime:
 
+                for ince in self.inceunluler:
+
+                    if harf == ince:
+                        ince_varmi = True
+                        break
+
+                for kalin in self.kalinunluler:
+
+                    if harf == kalin:
+                        kalin_varmi = True
+                        break
+            if ince_varmi and kalin_varmi:
                 uymayan += 1
             else:
-
                 uyan += 1
+
         return uyan, uymayan
 
 """

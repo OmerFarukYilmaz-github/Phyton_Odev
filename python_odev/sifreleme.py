@@ -3,8 +3,7 @@ import math
 from cryptography.fernet import Fernet
 import onetimepad
 import pyDes
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
+import rsa
 import binascii
 import hashlib
 
@@ -220,24 +219,9 @@ class sifrelemeYontemleri:
             text = self.text
 
         if encode:
-            keyPair = RSA.generate(3072)
-
-            pubKey = keyPair.publickey()
-            print(f"Public key:  (n={hex(pubKey.n)}, e={hex(pubKey.e)})")
-            pubKeyPEM = pubKey.exportKey()
-            print(pubKeyPEM.decode('ascii'))
-
-            print(f"Private key: (n={hex(pubKey.n)}, d={hex(keyPair.d)})")
-            privKeyPEM = keyPair.exportKey()
-            print(privKeyPEM.decode('ascii'))
-
-            encryptor = PKCS1_OAEP.new(pubKey)
-            encrypted = encryptor.encrypt(text.encode('ascii'))
-            cipher_text = binascii.hexlify(encrypted)
-            return cipher_text, keyPair
+            publicKey, privateKey = rsa.newkeys(512)
+            encMessage = rsa.encrypt(text.encode('ascii'),publicKey)
+            return encMessage,privateKey
         elif decode:
-            # decrypt
-            decryptor = PKCS1_OAEP.new(key)
-            decrypted = decryptor.decrypt(binascii.unhexlify(text))
-            plain_text = decrypted.decode('ascii')
-            return plain_text
+            decMessage = rsa.decrypt(text, key).decode()
+            return decMessage
