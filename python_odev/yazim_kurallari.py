@@ -53,24 +53,11 @@ class dilKontrol:
 
         return uyan, uymayan
 
-"""
-str = ""bilezik. ceylan. gazete.""
+
+str = "bilezik. ceylan. gazete."
 
 unluler = ["a", "e", "ı", "i", "o", "ö", "u", "ü"]
 kalin_unluler = ['a', 'ı', 'o', 'u']
 ince_unluler = ['e', 'i', 'ö', 'ü']
 
 kontrol = dilKontrol(kalin_unluler, unluler, ince_unluler)
-
-help = help()
-
-print("cümle sayisi: ", kontrol.cumleayir(str))
-
-print("kelime sayisi: ", kontrol.kelimeayir(str))
-
-print("sesli harf sayisi: ", kontrol.sesliharf(str))
-
-print("(büyük ünlü uyumuna uyan, büyük ünlü uyumuna uymayan): ", kontrol.uyumKontrol(str))
-
-"""
-
